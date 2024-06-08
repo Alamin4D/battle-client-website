@@ -12,7 +12,7 @@ import Slide from './Slide'
 
 import bgimg1 from '../../assets/banner1.avif'
 import bgimg2 from '../../assets/banner2.avif'
-import bgimg3 from '../../assets/banner3.jpg'
+import bgimg3 from '../../assets/banner5.jpg'
 
 export default function Carousel() {
     return (
