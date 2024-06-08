@@ -48,7 +48,7 @@ const Footer = () => {
                     </footer>
                     <footer className="footer footer-center p-4">
                         <aside>
-                            {/* <p className="mt-5 mb-5">© 2024 Edusity. All Rights Reserved.</p> */}
+                            <p className="mt-5 mb-5">© 2024 Edusity. All Rights Reserved.</p>
                         </aside>
                     </footer>
                 </div>
