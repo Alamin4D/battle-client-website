@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import useAuth from '../../hooks/useAuth'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
+const CheckoutForm = ({ closeModal, bookingInfo }) => {
   const stripe = useStripe()
   const elements = useElements()
   const axiosSecure = useAxiosSecure()
@@ -99,19 +99,15 @@ const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
       console.log(paymentInfo)
       try {
         // 2. save payment info in booking collection (db)
-        const { data } = await axiosSecure.post('/booking', paymentInfo)
-        console.log(data)
+        // const { data } = await axiosSecure.post('/booking', paymentInfo)
+        // console.log(data)
 
-        // 3. change room status to booked in db
-        await axiosSecure.patch(`/room/status/${bookingInfo?._id}`, {
-          status: true,
-        })
 
         // update ui
-        refetch()
+        // refetch()
         closeModal()
-        toast.success('Scholarship Applied Successfully')
-        navigate('/dashboard/all-applied-scholarship')
+        toast.success('Payment Successfully')
+        navigate('/payment')
       } catch (err) {
         console.log(err)
       }

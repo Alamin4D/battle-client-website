@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 const Featured = ({ item }) => {
-    const { _id, name, image, location, deadline, fees } = item;
+    const { _id, name, image, location, fees, Post_Date } = item;
     return (
         <div className="px-6">
             <div className="bg-base-100 shadow-xl">
@@ -21,7 +21,7 @@ const Featured = ({ item }) => {
                         </div>
                         <div className="flex items-center gap-2">
                             <CgCalendarDates className="text-red-800" size={20} />
-                            <p>{deadline}</p>
+                            <p>{Post_Date}</p>
                         </div>
                     </div>
                     {/* <div className="flex justify-between">
@@ -37,7 +37,7 @@ const Featured = ({ item }) => {
                     <h2 className="card-title">{name}</h2>
                     <div className="card-actions justify-start mt-4">
                         <Link to={`/scholarship/${_id}`}>
-                            <button className="btn bg-red-800 text-white">Details</button>
+                            <button className="btn bg-red-800 text-white">View Details</button>
                         </Link>
                     </div>
                 </div>

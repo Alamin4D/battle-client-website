@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import useAuth from '../../hooks/useAuth'
-// import axios from 'axios'
 import toast from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
+import { imageUpload } from '../../api/utils'
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -22,26 +22,32 @@ const SignUp = () => {
     const email = form.email.value
     const password = form.password.value
     const image = form.image.files[0]
-    const formData = new FormData()
-    formData.append('image', image)
+
+    if (password.length < 6) {
+      toast.error('password should be at least 6 characters or longer');
+      return;
+    }
+    else if (!/[A-Z]/.test(password)) {
+      toast.error('Your Password should have at least one uppercase characters.')
+      return;
+    }
+    else if (!/[a-z]/.test(password)) {
+      toast.error('Your Password should have at least one lowercase characters.')
+      return;
+    }
 
     try {
       setLoading(true)
       // 1. Upload image and get image url
-      // const { data } = await axios.post(
-      //   `https://api.imgbb.com/1/upload?key=${
-      //     import.meta.env.VITE_IMGBB_API_KEY
-      //   }`,
-      //   formData
-      // )
-      // console.log(data.data.display_url)
+      const image_url = await imageUpload(image)
+      console.log(image_url)
 
       //2. User Registration
       const result = await createUser(email, password)
       console.log(result)
 
       // 3. Save username and photo in firebase
-      await updateUserProfile(name, data.data.display_url)
+      await updateUserProfile(name, image_url)
       navigate('/')
       toast.success('Signup Successful')
     } catch (err) {

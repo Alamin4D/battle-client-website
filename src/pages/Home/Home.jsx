@@ -5,6 +5,7 @@ import Contract from "../../components/Contract/Contract"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import Featured from "../../components/Featured/Featured"
+import Testimonial from "../../components/Testimonial/Testimonial"
 
 const Home = () => {
     const [scholarships, setScholarships] = useState([]);
@@ -36,6 +37,7 @@ const Home = () => {
                     }
                 </div>
             </div>
+            <Testimonial />
             <Contract />
         </div>
     )

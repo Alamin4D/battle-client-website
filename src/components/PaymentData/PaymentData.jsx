@@ -1,33 +1,24 @@
-import { useState } from 'react'
-import { DateRange } from 'react-date-range'
-import { TbFidgetSpinner } from 'react-icons/tb'
-import useAuth from '../../../hooks/useAuth'
-import { imageUpload } from '../../../api/utils'
-import toast from 'react-hot-toast'
-import { Helmet } from 'react-helmet-async'
-import { useMutation } from '@tanstack/react-query'
-import { useNavigate } from 'react-router-dom'
-import useAxiosSecure from '../../../hooks/useAxiosSecure'
-const AddScholarship = () => {
+import { useNavigate } from "react-router-dom"
+import useAxiosSecure from "../../hooks/useAxiosSecure"
+import { useState } from "react"
+import { useMutation } from "@tanstack/react-query"
+import toast from "react-hot-toast"
+import { imageUpload } from "../../api/utils"
+import { Helmet } from "react-helmet-async"
+import { TbFidgetSpinner } from "react-icons/tb"
+import useAuth from "../../hooks/useAuth"
+
+const PaymentData = () => {
   const navigate = useNavigate()
   const axiosSecure = useAxiosSecure()
     const [loading, setLoading] = useState(false)
   const { user } = useAuth()
   const [imagePreview, setImagePreview] = useState()
   const [imageText, setImageText] = useState('Upload Image')
-    const [dates, setDates] = useState({
-        startDate: new Date(),
-        endDate: new Date(),
-        key: 'selection',
-      })
-      //Date range handler
-  const handleDates = item => {
-    setDates(item.selection)
-  }
 
   const { mutateAsync } = useMutation({
-    mutationFn: async scholarshipData => {
-      const { data } = await axiosSecure.post(`/add-scholarship`, scholarshipData)
+    mutationFn: async appliedData => {
+      const { data } = await axiosSecure.post(`/applied-scholarship`, appliedData)
       return data
     },
     onSuccess: () => {
@@ -42,20 +33,20 @@ const handleSubmit = async e => {
     e.preventDefault()
     setLoading(true)
     const form = e.target
-    const location = form.location.value
-    const category = form.category.value
+    const phone = form.phone.value
+    const gender = form.gender.value
     const name = form.name.value
-    const to = dates.endDate
-    const from = dates.startDate
-    const fees = form.fees.value
-    const Post_Date = form.Post_Date.value
-    const charge = form.charge.value
-    const description = form.description.value
-    const price = form.price.value
+    const category = form.category.value
+    const subject = form.subject.value
+    const address = form.address.value
     const degree = form.degree.value
+    const diploma = form.diploma.value
+    const date = form.date.value
+    const ssc = form.ssc.value
+    const hsc = form.hsc.value
     const image = form.image.files[0]
 
-    const moderator = {
+    const userData = {
       name: user?.displayName,
       image: user?.photoURL,
       email: user?.email,
@@ -63,25 +54,25 @@ const handleSubmit = async e => {
 
     try{
       const image_url = await imageUpload(image)
-      const scholarshipData = {
-        location,
+      const appliedData = {
+        phone,
+        gender,
+        subject,
+        address,
         category,
         name,
-        to,
-        from,
-        fees,
-        Post_Date,
-        charge,
-        price,
+        diploma,
+        date, 
+        ssc,
+        hsc,
+        userData,
         degree,
-        moderator,
-        description,
         image: image_url,
       }
-      console.table(scholarshipData)
+      console.table(appliedData)
 
       //   Post request to server
-      await mutateAsync(scholarshipData)
+      await mutateAsync(appliedData)
     } catch (err){
       console.log(err)
       toast.error(err.message)
@@ -106,87 +97,95 @@ const handleSubmit = async e => {
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-10'>
           <div className='space-y-6'>
             <div className='space-y-1 text-sm'>
-              <label htmlFor='location' className='block text-gray-600'>
-                Location
+              <label htmlFor='phone' className='block text-gray-600'>
+              Applicant phone number
               </label>
               <input
                 className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
-                name='location'
-                id='location'
-                type='text'
-                placeholder='Location'
+                name='phone'
+                id='phone'
+                type='number'
+                placeholder='Applicant phone number'
                 required
               />
             </div>
             <div className='space-y-1 text-sm'>
-              <label htmlFor='category' className='block text-gray-600'>
-              Category
+              <label htmlFor='gender' className='block text-gray-600'>
+              Applicant gender
               </label>
               <input
                 className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
-                name='category'
-                id='category'
+                name='gender'
+                id='gender'
                 type='text'
-                placeholder='Category'
+                placeholder='Applicant gender'
                 required
               />
             </div>
-
-            {/* <div className='space-y-1 text-sm'>
-              <label htmlFor='category' className='block text-gray-600'>
-                Category
-              </label>
-              <select
-                required
-                className='w-full px-4 py-3 border-rose-300 focus:outline-rose-500 rounded-md'
-                name='category'
-              >
-                {categories.map(category => (
-                  <option value={category.label} key={category.label}>
-                    {category.label}
-                  </option>
-                ))}
-              </select>
-            </div> */}
-
-            <div className='space-y-1'>
-              <label htmlFor='location' className='block text-gray-600'>
-                Select Availability Range
-              </label>
-              {/* Calender */}
-              <DateRange
-                rangeColors={['#F43F5E']}
-                editableDateInputs={true}
-                onChange={item => handleDates(item)}
-                moveRangeOnFirstSelection={false}
-                ranges={[dates]}
-              />
-            </div>
-          </div>
-          <div className='space-y-6'>
             <div className='space-y-1 text-sm'>
               <label htmlFor='name' className='block text-gray-600'>
-                University Name
+              University name
               </label>
               <input
                 className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
                 name='name'
                 id='name'
                 type='text'
-                placeholder='University Name'
+                placeholder='University name'
+                required
+              />
+            </div>
+            <div className='space-y-1 text-sm'>
+              <label htmlFor='category' className='block text-gray-600'>
+              Scholarship category
+              </label>
+              <input
+                className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
+                name='category'
+                id='category'
+                type='text'
+                placeholder='Scholarship category'
+                required
+              />
+            </div>
+            <div className='space-y-1 text-sm'>
+              <label htmlFor='subject' className='block text-gray-600'>
+              Subject Category
+              </label>
+              <input
+                className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
+                name='subject'
+                id='subject'
+                type='text'
+                placeholder='Subject Category'
+                required
+              />
+            </div>
+          </div>
+          <div className='space-y-6'>
+            <div className='space-y-1 text-sm'>
+              <label htmlFor='address' className='block text-gray-600'>
+              Applicant address
+              </label>
+              <input
+                className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
+                name='address'
+                id='address'
+                type='text'
+                placeholder='Applicant address'
                 required
               />
             </div>
             <div className='space-y-1 text-sm'>
               <label htmlFor='degree' className='block text-gray-600'>
-                Degree
+              Applicant Applying Degree
               </label>
               <input
                 className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
                 name='degree'
                 id='degree'
                 type='text'
-                placeholder='Degree'
+                placeholder='Applicant Applying Degree'
                 required
               />
             </div>
@@ -221,29 +220,29 @@ const handleSubmit = async e => {
             </div>
             <div className='flex justify-between gap-2'>
               <div className='space-y-1 text-sm'>
-                <label htmlFor='fees' className='block text-gray-600'>
-                Application fees
+                <label htmlFor='diploma' className='block text-gray-600'>
+                Diploma
                 </label>
                 <input
                   className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
-                  name='fees'
-                  id='fees'
-                  type='number'
-                  placeholder='Application fees'
+                  name='diploma'
+                  id='diploma'
+                  type='text'
+                  placeholder='Diploma'
                   required
                 />
               </div>
 
               <div className='space-y-1 text-sm'>
-                <label htmlFor='post date' className='block text-gray-600'>
-                Post Date
+                <label htmlFor='current date' className='block text-gray-600'>
+                Current Date
                 </label>
                 <input
                   className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
-                  name='Post_Date'
-                  id='Post_Date'
+                  name='date'
+                  id='date'
                   type='text'
-                  placeholder='Post Date'
+                  placeholder='Current Date'
                   required
                 />
               </div>
@@ -251,44 +250,32 @@ const handleSubmit = async e => {
 
             <div className='flex justify-between gap-2'>
               <div className='space-y-1 text-sm'>
-                <label htmlFor='charge' className='block text-gray-600'>
-                Service charge
+                <label htmlFor='ssc' className='block text-gray-600'>
+                SSC Result
                 </label>
                 <input
                   className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
-                  name='charge'
-                  id='charge'
+                  name='ssc'
+                  id='ssc'
                   type='number'
-                  placeholder='Service charge'
+                  placeholder='SSC Result'
                   required
                 />
               </div>
 
               <div className='space-y-1 text-sm'>
-                <label htmlFor='price' className='block text-gray-600'>
-                Price
+                <label htmlFor='hsc' className='block text-gray-600'>
+                HSC result
                 </label>
                 <input
                   className='w-full px-4 py-3 text-gray-800 border border-red-800 focus:outline-red-800 rounded-md '
-                  name='price'
-                  id='price'
+                  name='hsc'
+                  id='hsc'
                   type='number'
-                  placeholder='Price'
+                  placeholder='HSC result'
                   required
                 />
               </div>
-            </div>
-
-            <div className='space-y-1 text-sm'>
-              <label htmlFor='description' className='block text-gray-600'>
-                Description
-              </label>
-
-              <textarea
-                id='description'
-                className='block rounded-md focus:rose-300 w-full h-32 px-4 py-3 text-gray-800  border border-red-800 focus:outline-red-800 '
-                name='description'
-              ></textarea>
             </div>
           </div>
         </div>
@@ -301,7 +288,7 @@ const handleSubmit = async e => {
           {loading ? (
             <TbFidgetSpinner className='animate-spin m-auto' />
           ) : (
-            ' Save & Continue'
+            ' Submit'
           )}
         </button>
       </form>
@@ -309,4 +296,4 @@ const handleSubmit = async e => {
   )
 }
 
-export default AddScholarship
+export default PaymentData

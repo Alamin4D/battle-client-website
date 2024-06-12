@@ -4,6 +4,13 @@ import { useParams } from 'react-router-dom'
 import LoadingSpinner from '../../components/Shared/LoadingSpinner'
 import useAxiosCommon from '../../hooks/useAxiosCommon'
 import DetailsDate from '../../components/DetailsDate/DetailsDate';
+// import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+// import { Navigation } from 'swiper/modules';
 
 const DetailsPage = () => {
     const { id } = useParams()
@@ -41,14 +48,14 @@ const DetailsPage = () => {
                     <div className='col-span-4 flex flex-col gap-8'>
                         <div className='flex flex-col gap-2'>
                             <div
-                                className='text-xl font-semibold flex flex-row items-centergap-2'> <div>Hosted by { }</div>
+                                className='text-xl font-semibold flex flex-row items-centergap-2'> <div>Moderator by {scholarship?.moderator?.name}</div>
 
                                 <img
                                     className='rounded-full'
                                     height='30'
                                     width='30'
                                     alt='Avatar'
-                                    src='' />
+                                    src={scholarship?.moderator?.image} />
                             </div>
                             <div
                                 className='flex flex-row items-center gap-4 font-light text-neutral-500'>
@@ -64,6 +71,12 @@ const DetailsPage = () => {
                             {scholarship?.description}
                         </div>
                         <hr />
+                        {/* <div className='my-24'>
+                            <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+                                <SwiperSlide>Slide 1</SwiperSlide>
+                                <SwiperSlide>Slide 2</SwiperSlide>
+                            </Swiper>
+                        </div> */}
                     </div>
                     <div className='md:col-span-3 order-first md:order-last mb-10'>
                         {/* RoomReservation */}

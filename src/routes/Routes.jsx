@@ -13,6 +13,14 @@ import AddScholarship from '../pages/Dashboard/Moderator/AddScholarship'
 import AllAppliedScholarship from '../pages/Dashboard/Moderator/AllAppliedScholarship'
 import AllReviews from '../pages/Dashboard/Moderator/AllReviews'
 import ManageScholarships from '../pages/Dashboard/Moderator/ManageScholarships'
+import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
+import MyApplication from '../pages/Dashboard/User/MyApplication'
+import MyReviews from '../pages/Dashboard/User/MyReviews'
+import ManageReview from '../pages/Dashboard/Admin/ManageReview'
+import PaymentData from '../components/PaymentData/PaymentData'
+import AddReview from '../components/AddReview/AddReview'
+import UpdateReview from '../components/UpdateReview/UpdateReview'
+import UpdateScholarship from '../components/UpdateScholarship/UpdateScholarship'
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +36,23 @@ export const router = createBrowserRouter([
         path: '/scholarship',
         element: <ScholarShip />,
       },
+      {
+        path: '/payment',
+        element: <PaymentData />,
+      },
+      {
+        path: '/add-review',
+        element: <AddReview />,
+      },
+      {
+        path: '/update-review',
+        element: <UpdateReview />,
+      },
+    //   {
+    //     path: '/update/:id',
+    //     element: <UpdateScholarship />,
+    //     loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/scholarships/${params.id}`),
+    // },
       {
         path: '/scholarship/:id',
         element: (
@@ -63,7 +88,23 @@ export const router = createBrowserRouter([
       {
         path: 'manage-scholarships',
         element: <ManageScholarships />
-      }
+      },
+      {
+        path: 'manage-users',
+        element: <ManageUsers />
+      },
+      {
+        path: 'my-application',
+        element: <MyApplication />
+      },
+      {
+        path: 'my-reviews',
+        element: <MyReviews />
+      },
+      {
+        path: 'manage-review',
+        element: <ManageReview />
+      },
     ],
   },
 ])

@@ -4,9 +4,9 @@ import {
     Transition,
     TransitionChild,
     DialogPanel,
-    DialogTitle,
+    // DialogTitle,
 } from '@headlessui/react'
-import { format } from 'date-fns'
+// import { format } from 'date-fns'
 import { Fragment } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
@@ -41,39 +41,39 @@ const BookingModal = ({ closeModal, isOpen, bookingInfo, refetch }) => {
                             leaveTo='opacity-0 scale-95'
                         >
                             <DialogPanel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
-                                <DialogTitle
+                                {/* <DialogTitle
                                     as='h3'
                                     className='text-lg font-medium text-center leading-6 text-gray-900'
                                 >
                                     Review Info Before Reserve
-                                </DialogTitle>
-                                <div className='mt-2'>
+                                </DialogTitle> */}
+                                {/* <div className='mt-2'>
                                     <p className='text-sm text-gray-500'>
                                         University Name: {bookingInfo.name}
                                     </p>
-                                </div>
-                                <div className='mt-2'>
+                                </div> */}
+                                {/* <div className='mt-2'>
                                     <p className='text-sm text-gray-500'>
                                         Location: {bookingInfo.location}
                                     </p>
-                                </div>
-                                <div className='mt-2'>
+                                </div> */}
+                                {/* <div className='mt-2'>
                                     <p className='text-sm text-gray-500'>
                                         User: {bookingInfo.user.name}
                                     </p>
-                                </div>
-                                <div className='mt-2'>
+                                </div> */}
+                                {/* <div className='mt-2'>
                                     <p className='text-sm text-gray-500'>
                                         From: {format(new Date(bookingInfo.from), 'PP')} - To:{' '}
                                         {format(new Date(bookingInfo.to), 'PP')}
                                     </p>
-                                </div>
+                                </div> */}
 
-                                <div className='mt-2'>
+                                {/* <div className='mt-2'>
                                     <p className='text-sm text-gray-500'>
                                         Price: ${bookingInfo.price}
                                     </p>
-                                </div>
+                                </div> */}
                                 <hr className='mt-8 ' />
 
                                 <Elements stripe={stripePromise}>

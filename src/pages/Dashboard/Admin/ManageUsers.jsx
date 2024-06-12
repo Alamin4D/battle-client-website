@@ -7,6 +7,7 @@ import LoadingSpinner from '../../../components/Shared/LoadingSpinner'
 import UserDataRow from '../../../components/Dashboard/TableRows/UserDataRow'
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure()
+  const token = localStorage.getItem('access-token')
   //   Fetch users Data
   const {
     data: users = [],
@@ -14,6 +15,7 @@ const ManageUsers = () => {
     refetch,
   } = useQuery({
     queryKey: ['users'],
+    enabled:!!token,
     queryFn: async () => {
       const { data } = await axiosSecure(`/users`)
       return data
@@ -46,13 +48,19 @@ const ManageUsers = () => {
                     >
                       Role
                     </th>
-                    <th
+                    {/* <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
                       Status
-                    </th>
+                    </th> */}
 
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      Action
+                    </th>
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
