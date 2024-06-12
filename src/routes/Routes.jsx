@@ -20,7 +20,6 @@ import ManageReview from '../pages/Dashboard/Admin/ManageReview'
 import PaymentData from '../components/PaymentData/PaymentData'
 import AddReview from '../components/AddReview/AddReview'
 import UpdateReview from '../components/UpdateReview/UpdateReview'
-import UpdateScholarship from '../components/UpdateScholarship/UpdateScholarship'
 
 export const router = createBrowserRouter([
   {
@@ -48,11 +47,6 @@ export const router = createBrowserRouter([
         path: '/update-review',
         element: <UpdateReview />,
       },
-    //   {
-    //     path: '/update/:id',
-    //     element: <UpdateScholarship />,
-    //     loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/scholarships/${params.id}`),
-    // },
       {
         path: '/scholarship/:id',
         element: (
