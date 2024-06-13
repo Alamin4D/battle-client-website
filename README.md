@@ -1,4 +1,4 @@
-# [Kinsley](https://6669d89c3bf1500422f2b447--scintillating-rabanadas-b8327e.netlify.app/)
+# [Edusity](https://scintillating-rabanadas-b8327e.netlify.app/)
 
 
 # key Features

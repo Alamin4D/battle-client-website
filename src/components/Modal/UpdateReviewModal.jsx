@@ -12,16 +12,16 @@ import useAxiosSecure from '../../hooks/useAxiosSecure'
 import toast from 'react-hot-toast'
 import UpdateReviewForm from '../Form/UpdateReviewForm'
 
-const UpdateReviewModal = ({ setIsEditModalOpen, isOpen, review }) => {
+const UpdateReviewModal = ({ setIsEditModalOpen, isOpen, review, refetch }) => {
   const axiosSecure = useAxiosSecure()
   const [loading, setLoading] = useState(false)
   const [reviewData, setReviewData] = useState(review)
 
-
+console.log(reviewData)
   const handleSubmit = async e => {
     setLoading(true)
     e.preventDefault()
-    const updatedReviewData = Object.assign({}, review)
+    const updatedReviewData = Object.assign({}, reviewData)
     delete updatedReviewData._id
     console.log(updatedReviewData)
     try {
@@ -30,10 +30,10 @@ const UpdateReviewModal = ({ setIsEditModalOpen, isOpen, review }) => {
         updatedReviewData
       )
       console.log(data)
-    //   refetch()
+      refetch()
       setIsEditModalOpen(false)
       setLoading(false)
-      toast.success('Home info updated')
+      toast.success('Review info updated')
     } catch (err) {
       console.log(err)
       setLoading(false)

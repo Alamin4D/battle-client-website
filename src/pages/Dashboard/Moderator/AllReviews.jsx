@@ -99,6 +99,7 @@ const AllReviews = () => {
                                         key={review._id}
                                         review={review}
                                         handleDelete={handleDelete}
+                                        refetch={refetch}
                                     />
                                 ))}
                             </tbody>

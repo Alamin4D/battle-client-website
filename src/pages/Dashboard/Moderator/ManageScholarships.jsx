@@ -23,7 +23,7 @@ const ManageScholarships = () => {
     //   delete
     const { mutateAsync } = useMutation({
         mutationFn: async id => {
-            const { data } = await axiosSecure.delete(`/all-applied/${id}`)
+            const { data } = await axiosSecure.delete(`/scholarship/${id}`)
             return data
         },
         onSuccess: data => {

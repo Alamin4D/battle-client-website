@@ -33,7 +33,7 @@ const UpdateScholarshipModal = ({ setIsEditModalOpen, isOpen, scholarship }) => 
     //   refetch()
       setIsEditModalOpen(false)
       setLoading(false)
-      toast.success('Home info updated')
+      toast.success('Scholarship info updated')
     } catch (err) {
       console.log(err)
       setLoading(false)
