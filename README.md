@@ -1,5 +1,3 @@
-<!-- # [Edusity](https://scintillating-rabanadas-b8327e.netlify.app/) -->
-
 # Eduan University
 
 ### Live Site URL:
@@ -20,7 +18,7 @@ Ensure you have the following software installed on your system:
 First, clone the repository to your local machine using Git.
 
 ```bash
-git clone https://github.com/Farhad2590/Eat-Eassy-Client.git
+git clone https://github.com/Alamin4D/battle-client-website.git
 cd eateassy
 ```
 
